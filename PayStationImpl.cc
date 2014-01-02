@@ -14,7 +14,7 @@ void PayStationImpl::addPayment( int coinValue )
 }
   
 int PayStationImpl::readDisplay() {
-	return 0;
+	return 2;
 }
   
 Receipt PayStationImpl::buy() {
