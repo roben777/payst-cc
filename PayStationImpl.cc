@@ -18,7 +18,7 @@ void PayStationImpl::addPayment( int coinValue )
 		default:
 			throw IllegalCoinException("Invalid coin: " + coinValue);
 	}
-	insertedSoFar = coinValue;
+	insertedSoFar += coinValue;
 }
   
 int PayStationImpl::readDisplay() {

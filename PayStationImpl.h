@@ -27,6 +27,9 @@ class PayStationImpl : public PayStationInterface {
 private:
 	int insertedSoFar;
 public:
+	// initialize members in default constructor
+	PayStationImpl() { insertedSoFar = 0; };
+	
   void addPayment( int coinValue )
 		throw (IllegalCoinException);
   

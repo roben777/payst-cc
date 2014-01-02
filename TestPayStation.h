@@ -21,6 +21,7 @@ class TestPayStation : public CppUnit::TestFixture {
 	CPPUNIT_TEST(test5CentsIs2Min);
 	CPPUNIT_TEST(test25CentsIs10Min);
 	CPPUNIT_TEST_EXCEPTION(testEnterIllegalCoin, IllegalCoinException);
+	CPPUNIT_TEST(test25And10CentsAre14Min);
 	CPPUNIT_TEST_SUITE_END();
 	
 private:
@@ -49,6 +50,13 @@ public:
 	// Should throw exception IllegalCoinException on illegal coin value
 	void testEnterIllegalCoin() {
 		ps->addPayment(17);
+	}
+
+	// Should display 14 min for 10+25 cents
+	void test25And10CentsAre14Min() {
+		ps->addPayment(10);
+		ps->addPayment(25);
+		CPPUNIT_ASSERT((25+10)/5 * 2 == ps->readDisplay());
 	}
 };
 
