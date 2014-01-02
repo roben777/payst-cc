@@ -1,10 +1,11 @@
 // main test module?
 
+#include <cppunit/ui/text/TestRunner.h>
 #include "TestPayStation.h"
 
 int main() {
-	TestPayStation test("PayStationImpl test");
-	test.test5CentsIs2Min();
-	test.test25CentsIs10Min();
+	CppUnit::TextUi::TestRunner runner;
+	runner.addTest(TestPayStation::suite());
+	runner.run();
 	return 0;
 }
