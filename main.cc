@@ -3,7 +3,8 @@
 #include "TestPayStation.h"
 
 int main() {
-	TestPayStation testCase("PayStationImpl test");
-	testCase.test5CentsIs2Min();
+	TestPayStation test("PayStationImpl test");
+	test.test5CentsIs2Min();
+	test.test25CentsIs10Min();
 	return 0;
 }

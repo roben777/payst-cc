@@ -26,6 +26,13 @@ TestPayStation(std::string name) : CppUnit::TestCase(name) {};
 		CPPUNIT_ASSERT(2 == ps->readDisplay());
 		delete ps;
 	};
+
+	void test25CentsIs10Min() {
+		PayStation ps = new PayStationImpl;
+		ps->addPayment(25);
+		CPPUNIT_ASSERT(10 == ps->readDisplay());
+		delete ps;
+	}
 };
 
 #endif

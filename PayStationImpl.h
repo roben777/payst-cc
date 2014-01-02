@@ -24,6 +24,8 @@
 #include "PayStation.h"
 
 class PayStationImpl : public PayStationInterface {
+private:
+	int insertedSoFar;
 public:
   void addPayment( int coinValue )
 		throw (IllegalCoinException);

@@ -11,10 +11,11 @@
 
 void PayStationImpl::addPayment( int coinValue )
 	throw (IllegalCoinException){
+	insertedSoFar = coinValue;
 }
   
 int PayStationImpl::readDisplay() {
-	return 2;
+	return insertedSoFar / 5 * 2;
 }
   
 Receipt PayStationImpl::buy() {
