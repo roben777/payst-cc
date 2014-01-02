@@ -1,6 +1,6 @@
 CC = g++
 LIBS = -lcppunit -ldl
-OBJS = PayStationImpl.o main.o
+OBJS = PayStationImpl.o main.o ReceiptImpl.o
 
 testPS: $(OBJS)
 	$(CC) -o $@ $(OBJS) $(LIBS)
