@@ -24,6 +24,7 @@ class TestPayStation : public CppUnit::TestFixture {
 	CPPUNIT_TEST(test25And10CentsAre14Min);
 	CPPUNIT_TEST(testBuy);
 	CPPUNIT_TEST(testBuy100Cents);
+	CPPUNIT_TEST(shouldClearAfterBuy);
 	CPPUNIT_TEST_SUITE_END();
 	
 private:
@@ -71,6 +72,7 @@ public:
 		CPPUNIT_ASSERT(receipt != NULL);
 		// appropriate amount in receipt
 		CPPUNIT_ASSERT((5+10+25)/5 * 2 == receipt->value());
+		delete receipt;
 	}
 
 	// should return correct Receipt for 100 cents
@@ -86,6 +88,23 @@ public:
 		CPPUNIT_ASSERT(receipt != NULL);
 		// appropriate amount in receipt
 		CPPUNIT_ASSERT((3*25 + 2*10 + 5)/5 * 2 == receipt->value());
+		delete receipt;
+	}
+
+	// should clear display after buy
+	void shouldClearAfterBuy() {
+		ps->addPayment(25);
+		delete ps->buy();  // don't use result now
+		CPPUNIT_ASSERT(ps->readDisplay() == 0);
+		ps->addPayment(10);
+		ps->addPayment(25);
+		// display correct result
+		CPPUNIT_ASSERT((10+25)/5*2 == ps->readDisplay());
+		// buy correct receipt again to see if correct after another buy
+		Receipt receipt = ps->buy();
+		CPPUNIT_ASSERT((10+25)/5*2 == receipt->value());
+		// display should be reset
+		CPPUNIT_ASSERT(0 == ps->readDisplay());
 	}
 };
 

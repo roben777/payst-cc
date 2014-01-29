@@ -28,7 +28,9 @@ int PayStationImpl::readDisplay() {
 }
   
 Receipt PayStationImpl::buy() {
-	return new ReceiptImpl(timeBoughtSoFar);
+	Receipt r =  new ReceiptImpl(timeBoughtSoFar);
+	insertedSoFar = timeBoughtSoFar = 0;
+	return r;
 }
 
 void PayStationImpl::cancel() {
