@@ -9,14 +9,13 @@ testPS: $(OBJS)
 
 %.o : %.cc
 	$(CC) $(CCFLAGS) -c $<
+	$(CC) $(CCFLAGS) -MM -MP -MT $@ $< > $(basename $@).d
+
 
 .PHONY : clean
 clean :
-	rm -f *.o *~
+	rm -f *.o *~ *.d
 
-## generate the prerequistes and append to the desired file 
-.prereq : $(OBJS:.o=.cc) $(wildcard $(HEADERDIRS)/*.h) Makefile
-	rm -f .prereq 
-	$(CC) $(CCFLAGS) -MM $(OBJS:.o=.cc) >> ./.prereq
-## include the generated prerequisite file 
-include .prereq
+
+## include the generated dependency files
+-include $(addsuffix .d,$(basename $(OBJS)))
