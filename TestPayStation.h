@@ -23,6 +23,7 @@ class TestPayStation : public CppUnit::TestFixture {
 	CPPUNIT_TEST_EXCEPTION(testEnterIllegalCoin, IllegalCoinException);
 	CPPUNIT_TEST(test25And10CentsAre14Min);
 	CPPUNIT_TEST(testBuy);
+	CPPUNIT_TEST(testBuy100Cents);
 	CPPUNIT_TEST_SUITE_END();
 	
 private:
@@ -70,6 +71,21 @@ public:
 		CPPUNIT_ASSERT(receipt != NULL);
 		// appropriate amount in receipt
 		CPPUNIT_ASSERT((5+10+25)/5 * 2 == receipt->value());
+	}
+
+	// should return correct Receipt for 100 cents
+	void testBuy100Cents() {
+		ps->addPayment(25);
+		ps->addPayment(25);
+		ps->addPayment(25);
+		ps->addPayment(10);
+		ps->addPayment(10);
+		ps->addPayment(5);
+		Receipt receipt = ps->buy();
+		// we have a valid receipt object returned
+		CPPUNIT_ASSERT(receipt != NULL);
+		// appropriate amount in receipt
+		CPPUNIT_ASSERT((3*25 + 2*10 + 5)/5 * 2 == receipt->value());
 	}
 };
 

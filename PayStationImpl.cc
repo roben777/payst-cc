@@ -8,6 +8,7 @@
  */
 
 #include "PayStationImpl.h"
+#include "ReceiptImpl.h"
 
 void PayStationImpl::addPayment( int coinValue )
 	throw (IllegalCoinException){
@@ -19,19 +20,15 @@ void PayStationImpl::addPayment( int coinValue )
 			throw IllegalCoinException("Invalid coin: " + coinValue);
 	}
 	insertedSoFar += coinValue;
+	timeBoughtSoFar = insertedSoFar / 5 * 2;
 }
   
 int PayStationImpl::readDisplay() {
-	return insertedSoFar / 5 * 2;
+	return timeBoughtSoFar;
 }
   
 Receipt PayStationImpl::buy() {
-	class Temp : public ReceiptInterface {
-	public:
-		int value() { return (5+10+25)/5 * 2; };
-	};
-	
-	return new Temp;
+	return new ReceiptImpl(timeBoughtSoFar);
 }
 
 void PayStationImpl::cancel() {
