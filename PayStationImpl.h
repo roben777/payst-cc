@@ -27,9 +27,12 @@ class PayStationImpl : public PayStationInterface {
 private:
 	int insertedSoFar;
 	int timeBoughtSoFar;
+
+	/// clears the amount inserted so far and time bought
+	void reset();
 public:
 	// initialize members in default constructor
-	PayStationImpl() { insertedSoFar = timeBoughtSoFar = 0; };
+	PayStationImpl();
 	
   void addPayment( int coinValue )
 		throw (IllegalCoinException);

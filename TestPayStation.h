@@ -25,6 +25,7 @@ class TestPayStation : public CppUnit::TestFixture {
 	CPPUNIT_TEST(testBuy);
 	CPPUNIT_TEST(testBuy100Cents);
 	CPPUNIT_TEST(shouldClearAfterBuy);
+	CPPUNIT_TEST(shouldClearAfterCancel);
 	CPPUNIT_TEST_SUITE_END();
 	
 private:
@@ -44,25 +45,25 @@ public:
 		CPPUNIT_ASSERT(5/5 * 2 == ps->readDisplay());
 	};
 
-	// Should display 10 min for 25 cents
+	/// Should display 10 min for 25 cents
 	void test25CentsIs10Min() {
 		ps->addPayment(25);
 		CPPUNIT_ASSERT(25/5 * 2 == ps->readDisplay());
 	}
 
-	// Should throw exception IllegalCoinException on illegal coin value
+	/// Should throw exception IllegalCoinException on illegal coin value
 	void testEnterIllegalCoin() {
 		ps->addPayment(17);
 	}
 
-	// Should display 14 min for 10+25 cents
+	/// Should display 14 min for 10+25 cents
 	void test25And10CentsAre14Min() {
 		ps->addPayment(10);
 		ps->addPayment(25);
 		CPPUNIT_ASSERT((25+10)/5 * 2 == ps->readDisplay());
 	}
 
-	// Should return a correct Receipt object for appropriate amount of time
+	/// Should return a correct Receipt object for appropriate amount of time
 	void testBuy() {
 		ps->addPayment(5);
 		ps->addPayment(10);
@@ -75,7 +76,7 @@ public:
 		delete receipt;
 	}
 
-	// should return correct Receipt for 100 cents
+	/// should return correct Receipt for 100 cents
 	void testBuy100Cents() {
 		ps->addPayment(25);
 		ps->addPayment(25);
@@ -91,7 +92,7 @@ public:
 		delete receipt;
 	}
 
-	// should clear display after buy
+	/// should clear display after buy
 	void shouldClearAfterBuy() {
 		ps->addPayment(25);
 		delete ps->buy();  // don't use result now
@@ -105,6 +106,16 @@ public:
 		CPPUNIT_ASSERT((10+25)/5*2 == receipt->value());
 		// display should be reset
 		CPPUNIT_ASSERT(0 == ps->readDisplay());
+	}
+
+	/// should clear after cancel
+	void shouldClearAfterCancel() {
+		ps->addPayment(10);
+		ps->cancel();
+		CPPUNIT_ASSERT(ps->readDisplay() == 0);
+		ps->addPayment(25);
+		// insert after cancel should work
+		CPPUNIT_ASSERT(25/5*2 == ps->readDisplay());
 	}
 };
 
