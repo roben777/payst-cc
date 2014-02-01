@@ -1,22 +1,24 @@
+## right now there is no production code apart from the libraries...
+## Call recursively on the libraries
+
 CC = g++
 LIBS = -lcppunit -ldl
-THEOBJECTS = PayStationImpl.o main.o ReceiptImpl.o
+THEOBJECTS = 
 HEADERDIRS = ../include
 OBJDIR = ../obj
 CCFLAGS = -I $(HEADERDIRS)
-OBJS = $(addprefix $(OBJDIR)/, $(THEOBJECTS))
+OBJS = $(addprefix $(OBJDIR)/, $(THEOBJECTS)) 
 
-$(OBJDIR)/testPS: $(OBJS)
-	$(CC) -o $@ $(OBJS) $(LIBS)
+.PHONY: all
+all:
+	$(MAKE) -C paystation
+# generate the production code by linking here ...
 
 $(OBJDIR)/%.o : %.cc
 	$(CC) $(CCFLAGS) -c -o $@ $<
-	$(CC) $(CCFLAGS) -MM -MP -MT $@ $< > $(basename $@).d
-
 
 .PHONY : clean
 clean :
-	rm -f $(OBJDIR)/*.o *~ $(OBJDIR)/*.d $(OBJDIR)/testPS
+	rm -f $(OBJDIR)/*.o *~
+	$(MAKE) -C paystation clean
 
-## include the generated dependency files
--include $(addsuffix .d,$(basename $(OBJS)))
