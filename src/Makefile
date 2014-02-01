@@ -1,21 +1,22 @@
 CC = g++
 LIBS = -lcppunit -ldl
-OBJS = PayStationImpl.o main.o ReceiptImpl.o
+THEOBJECTS = PayStationImpl.o main.o ReceiptImpl.o
 HEADERDIRS = ../include
+OBJDIR = ../obj
 CCFLAGS = -I $(HEADERDIRS)
+OBJS = $(addprefix $(OBJDIR)/, $(THEOBJECTS))
 
-testPS: $(OBJS)
+$(OBJDIR)/testPS: $(OBJS)
 	$(CC) -o $@ $(OBJS) $(LIBS)
 
-%.o : %.cc
-	$(CC) $(CCFLAGS) -c $<
+$(OBJDIR)/%.o : %.cc
+	$(CC) $(CCFLAGS) -c -o $@ $<
 	$(CC) $(CCFLAGS) -MM -MP -MT $@ $< > $(basename $@).d
 
 
 .PHONY : clean
 clean :
-	rm -f *.o *~ *.d
-
+	rm -f $(OBJDIR)/*.o *~ $(OBJDIR)/*.d $(OBJDIR)/testPS
 
 ## include the generated dependency files
 -include $(addsuffix .d,$(basename $(OBJS)))
