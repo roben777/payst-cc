@@ -9,6 +9,7 @@
 
 #include "PayStationImpl.h"
 #include "ReceiptImpl.h"
+#include "LinearRateStrategy.h"
 
 void PayStationImpl::addPayment( int coinValue )
 	throw (IllegalCoinException){
@@ -20,7 +21,7 @@ void PayStationImpl::addPayment( int coinValue )
 			throw IllegalCoinException("Invalid coin: " + coinValue);
 	}
 	insertedSoFar += coinValue;
-	timeBoughtSoFar = insertedSoFar / 5 * 2;
+	timeBoughtSoFar = rateStrategy->calculateTime(insertedSoFar);
 }
   
 int PayStationImpl::readDisplay() {
@@ -42,8 +43,14 @@ PayStationImpl::~PayStationImpl() {
 
 PayStationImpl::PayStationImpl() {
 	reset();
+	rateStrategy = new LinearRateStrategy; // the default strategy
 }
 
 void PayStationImpl::reset() {
 	insertedSoFar = timeBoughtSoFar = 0;
+}
+
+PayStationImpl::PayStationImpl(RateStrategy rs) {
+	reset();
+	rateStrategy = rs;  // rs is a pointer to allocated memory
 }

@@ -22,17 +22,24 @@
 #define __PAYSTATIONIMPL_H
 
 #include "PayStation.h"
+#include "RateStrategy.h"
 
 class PayStationImpl : public PayStationInterface {
 private:
 	int insertedSoFar;
 	int timeBoughtSoFar;
 
+	RateStrategy rateStrategy; ///< the strategy for rate calculation
+
 	/// clears the amount inserted so far and time bought
 	void reset();
 public:
-	// initialize members in default constructor
+	/// default constructor
 	PayStationImpl();
+
+	/// constructor
+	/// \param [in] rs the rate strategy object to be used by the pay station.
+	PayStationImpl(RateStrategy rs);
 	
   void addPayment( int coinValue )
 		throw (IllegalCoinException);
