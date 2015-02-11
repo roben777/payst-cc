@@ -39,6 +39,15 @@ void PayStationImpl::cancel() {
 }
 
 PayStationImpl::~PayStationImpl() {
+	// before I start Iteration 5, I realize that I have a memory leak
+	// (another example of something hard to test automatically; use
+	// valgrind instead) 
+	// RateStrategy is a pointer. We make a convention: whenever we pass
+	// the pointer to a function, the function owns it and it is
+	// responsible to free it. So we must not pass pointers to automatic
+	// variables. The function must free it.
+	// See std::auto_ptr for a safer way to do all of this
+	delete rateStrategy;
 }
 
 PayStationImpl::PayStationImpl() {
