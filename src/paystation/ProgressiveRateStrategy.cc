@@ -10,5 +10,10 @@
 #include "ProgressiveRateStrategy.h"
 
 int ProgressiveRateStrategy::calculateTime(int amount) {
-	return amount / 5 * 2;  // 5 cents are 2 min for first hour
+	if (amount > 150)  {
+		return 60 + (amount - 150) / 10 * 3; // 5 cents are 1.5 min
+	}
+	else  {		
+		return amount / 5 * 2;  // 5 cents are 2 min for first hour
+	}
 }

@@ -21,6 +21,7 @@
 class TestProgressiveRatePS : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(TestProgressiveRatePS);
 	CPPUNIT_TEST(test1HourCosts150Cents);
+	CPPUNIT_TEST(test2HoursCost350Cents);
 	CPPUNIT_TEST_SUITE_END();
 
 
@@ -50,6 +51,13 @@ public:
 		CPPUNIT_ASSERT(ps->readDisplay() == 60 /*min*/);
 	};
 
+	/// testcase 2 h = 1.5 + 2 dollars
+	void test2HoursCost350Cents() {
+		add1Dollar();  add1Dollar();
+		add1Dollar();
+		ps->addPayment(25); ps->addPayment(25);
+		CPPUNIT_ASSERT(ps->readDisplay() == 120);
+	};
 };
 
 #endif

@@ -17,7 +17,7 @@ $(OBJDIR)/%.o : %.cc
 
 .PHONY : clean
 clean :
-	rm -f $(OBJDIR)/*.o *~ $(OBJDIR)/*.d
+	rm -f $(OBJDIR)/*.o *~ $(OBJDIR)/*.d $(OBJDIR)/*.a
 
 # add the dependency info to make
 -include $(addsuffix .d,$(basename $(OBJS)))
