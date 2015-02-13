@@ -6,6 +6,7 @@
 #include "TestProgressiveRatePS.h"
 #include "TestProgressiveRateStrategy.h"
 #include "TestIntegration.h"
+#include "TestPayStationUnit.h"
 
 int main() {
 	CppUnit::TextUi::TestRunner runner;
@@ -14,6 +15,7 @@ int main() {
 	runner.addTest(TestProgressiveRatePS::suite());
 	runner.addTest(TestProgressiveRateStrategy::suite());
 	runner.addTest(TestIntegration::suite());
+	runner.addTest(TestPayStationUnit::suite());
 	runner.run();
 	return 0;
 }
