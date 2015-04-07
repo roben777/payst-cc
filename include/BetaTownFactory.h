@@ -32,7 +32,7 @@ public:
 	}
 
 	Receipt createReceipt(int parkingTime) {
-		return new StandardReceipt(parkingTime);
+		return new StandardReceipt(parkingTime, true);
 	}
 };
 

@@ -24,8 +24,8 @@
 /// Test fixture for ProgressiveRateStrategy
 class TestIntegration : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(TestIntegration);
-	CPPUNIT_TEST(testPSLinear2h300c);
-	CPPUNIT_TEST(testPSProgressive2h350c);
+	CPPUNIT_TEST(testPSAlpha2h300cStandard);
+	CPPUNIT_TEST(testPSBeta2h350cBar);
 	CPPUNIT_TEST(testPSGammaWeekday2h300c);
 	CPPUNIT_TEST_SUITE_END();
 
@@ -38,21 +38,49 @@ private:
 	};
 
 
+	/// helper function to count the number of lines in a Receipt object.
+	/// \param [in] r the receipt object. Must be not NULL
+	/// \return the number of lines printed by receipt->print()
+	int nrLinesInReceipt(Receipt r) {
+		std::ostringstream sstr;
+		r->print(sstr);
+		std::string s = sstr.str();
+		int nLines = 0;  // the count of lines in s
+		std::size_t lastNLOffset = -1;  // offset of the most recent newline
+		do {
+			lastNLOffset = s.find('\n',lastNLOffset+1);
+			nLines++;
+		}
+		while (lastNLOffset != std::string::npos);
+		return nLines;
+	}
+	
+
 public:
 	// integrate test PS and Linear strategy
-	void testPSLinear2h300c()  {
+	void testPSAlpha2h300cStandard()  {
 		ps = new PayStationImpl(new AlphaTownFactory);
 		add1Dollar();  add1Dollar();  add1Dollar();
 		CPPUNIT_ASSERT(ps->readDisplay() == 120);
+		Receipt receipt = ps->buy();
+		CPPUNIT_ASSERT(receipt != NULL);
+		CPPUNIT_ASSERT(nrLinesInReceipt(receipt) == 3);
+		
+		delete receipt;
 		delete ps;
 	};
 
-		// integrate test PS and Linear strategy
-	void testPSProgressive2h350c()  {
+		// integrate test PS and Beta Factory and test for bar receipt
+	void testPSBeta2h350cBar()  {
 		ps = new PayStationImpl(new BetaTownFactory);
 		add1Dollar();  add1Dollar();  add1Dollar();
 		ps->addPayment(25);  ps->addPayment(25);
 		CPPUNIT_ASSERT(ps->readDisplay() == 120);
+		Receipt receipt = ps->buy();
+		CPPUNIT_ASSERT(receipt != NULL);
+		CPPUNIT_ASSERT(nrLinesInReceipt(receipt) == 4);
+		
+		delete receipt;
 		delete ps;
 	};
 
@@ -69,17 +97,9 @@ public:
 		// case for receipts, I add the test code here since readDisplay
 		// is too simple to mess up my test case
 		Receipt receipt = ps->buy();
-		std::ostringstream sstr;
-		receipt->print(sstr);
-		std::string s = sstr.str();  // get the output as string
-		std::size_t line1 = s.find('\n');
-		std::size_t line2 = s.find('\n',line1+1);
-		std::size_t lineCollon = s.find(':', line2+1);
-		CPPUNIT_ASSERT(s.substr(0, line1) == "PARKING RECEIPT");
-		CPPUNIT_ASSERT(s.substr(line1+1, line2-line1-1) == "Value: 120 min.");
-		CPPUNIT_ASSERT(s.substr(line2+1, lineCollon-line2-1) == "Car parked at");
-		CPPUNIT_ASSERT(s[lineCollon+4] == ':');
-
+		CPPUNIT_ASSERT(receipt != NULL);
+		CPPUNIT_ASSERT(nrLinesInReceipt(receipt) == 3);
+		
 		delete receipt;
 		delete ps;		
 	}

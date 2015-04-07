@@ -26,9 +26,9 @@ int StandardReceipt::value() {
 void StandardReceipt::print(std::ostream& str)  {
 	str << "PARKING RECEIPT" << std::endl;
 	str << "Value: " << value() << " min." << std::endl;
-	str << "Car parked at: " << currentTime() << std::endl;
+	str << "Car parked at: " << currentTime();
 	if (printBar) {
-		str << "|||||||||||||||";
+		str  << std::endl << "|||||||||||||||";
 	}
 }
 
