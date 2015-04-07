@@ -24,6 +24,7 @@
 class StandardReceipt : public ReceiptInterface {
 private:
 	int theValue;
+	bool printBar;
 
 	/// helper function: returns a string consisting of the current
 	/// clock time in hh:mm format
@@ -32,7 +33,11 @@ private:
 	std::string currentTime();
 	
 public:
-	StandardReceipt(int amountOfTime);
+	/// constructor for standard and bar receipts
+	/// \param [in] amountOfTime is the number of minutes of parking bought
+	/// \param [in] hasBar is true if the receipt should print a barcode,
+	///   false otherwise; default value is false
+	StandardReceipt(int amountOfTime, bool hasBar = false);
 	int value();
 	void print(std::ostream& str);
 };

@@ -12,8 +12,9 @@
 #include <sstream>
 #include <iomanip>
 
-StandardReceipt::StandardReceipt(int amountOfTime) {
+StandardReceipt::StandardReceipt(int amountOfTime, bool hasBar) {
 	theValue = amountOfTime;
+	printBar = hasBar;
 }
 
 
@@ -25,7 +26,10 @@ int StandardReceipt::value() {
 void StandardReceipt::print(std::ostream& str)  {
 	str << "PARKING RECEIPT" << std::endl;
 	str << "Value: " << value() << " min." << std::endl;
-	str << "Car parked at: " << currentTime();
+	str << "Car parked at: " << currentTime() << std::endl;
+	if (printBar) {
+		str << "|||||||||||||||";
+	}
 }
 
 
@@ -37,7 +41,7 @@ std::string StandardReceipt::currentTime() {
 
 	std::ostringstream sstr;
 	sstr.fill('0');
-	sstr << std::right << std::setw(2) << timeval->tm_hour << std::setw(1) << ':'
+	sstr << std::right << std::setw(2) << timeval->tm_hour << ':'
 			 << std::setw(2) << timeval->tm_min;
 
 	return sstr.str();
