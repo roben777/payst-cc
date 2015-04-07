@@ -40,6 +40,7 @@ void PayStationImpl::cancel() {
 PayStationImpl::~PayStationImpl() {
 	delete rateStrategy;
 	delete displayStrategy;
+	delete psFactory;
 }
 
 

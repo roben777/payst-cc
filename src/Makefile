@@ -1,4 +1,4 @@
-## right now there is no production code apart from the libraries...
+## Production code consists of libpaystation.a and PSGui 
 ## Call recursively on the libraries
 
 CC = g++
@@ -12,6 +12,8 @@ OBJS = $(addprefix $(OBJDIR)/, $(THEOBJECTS))
 .PHONY: all
 all:
 	$(MAKE) -C paystation
+	$(MAKE) -C view
+
 # generate the production code by linking here ...
 
 $(OBJDIR)/%.o : %.cc
@@ -21,4 +23,4 @@ $(OBJDIR)/%.o : %.cc
 clean :
 	rm -f $(OBJDIR)/*.o *~
 	$(MAKE) -C paystation clean
-
+	$(MAKE) -C view clean
