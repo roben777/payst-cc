@@ -9,7 +9,7 @@
 
 #include "PayStationImpl.h"
 #include "ReceiptImpl.h"
-#include "LinearRateStrategy.h"
+//#include "LinearRateStrategy.h"
 
 void PayStationImpl::addPayment( int coinValue )
 	throw (IllegalCoinException){
@@ -50,10 +50,10 @@ PayStationImpl::~PayStationImpl() {
 	delete rateStrategy;
 }
 
-PayStationImpl::PayStationImpl() {
-	reset();
-	rateStrategy = new LinearRateStrategy; // the default strategy
-}
+// PayStationImpl::PayStationImpl() {
+// 	reset();
+// 	rateStrategy = new LinearRateStrategy; // the default strategy
+// }
 
 void PayStationImpl::reset() {
 	insertedSoFar = timeBoughtSoFar = 0;

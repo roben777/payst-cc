@@ -34,9 +34,6 @@ private:
 	/// clears the amount inserted so far and time bought
 	void reset();
 public:
-	/// default constructor
-	PayStationImpl();
-
 	/// constructor
 	/// \param [in] rs the rate strategy object to be used by the pay station.
 	PayStationImpl(RateStrategy rs);

@@ -19,6 +19,8 @@
 /// Test fixture for ProgressiveRateStrategy
 class TestProgressiveRateStrategy : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(TestProgressiveRateStrategy);
+	CPPUNIT_TEST(test1HourCosts150Cents);
+	CPPUNIT_TEST(test2HoursCost350Cents);
 	CPPUNIT_TEST(test3HoursCost650Cents);
 	CPPUNIT_TEST_SUITE_END();
 private:
@@ -33,6 +35,17 @@ public:
 		delete rs;
 	};
 
+	/// testcase for buying 1 hour
+	void test1HourCosts150Cents() {
+		CPPUNIT_ASSERT(rs->calculateTime(150) == 60 /*min*/);
+	}
+
+	/// testcase 2 h = 1.5 + 2 dollars
+	void test2HoursCost350Cents() {
+		CPPUNIT_ASSERT(rs->calculateTime(350) == 120);
+	}
+
+  /// testcase 3h = 6.5 dollars
 	void test3HoursCost650Cents()  {
 		CPPUNIT_ASSERT(rs->calculateTime(650/*cents*/) == 180 /*min*/);
 	}
