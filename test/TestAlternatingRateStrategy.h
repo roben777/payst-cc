@@ -22,6 +22,7 @@
 class TestAlternatingRateStrategy : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(TestAlternatingRateStrategy);
 	CPPUNIT_TEST(testWD300CentsAre120Min);
+	CPPUNIT_TEST(testWE350CentsAre120Min);
 	CPPUNIT_TEST_SUITE_END();
 private:
 	RateStrategy rsWDay, rsWEnd;
@@ -42,6 +43,11 @@ public:
 
 	void testWD300CentsAre120Min()  {
 		CPPUNIT_ASSERT(rsWDay->calculateTime(300/*cents*/) == 120 /*min*/);
+	}
+
+
+	void testWE350CentsAre120Min()  {
+		CPPUNIT_ASSERT(rsWEnd->calculateTime(350/*cents*/) == 120 /*min*/);
 	}
 };
 
