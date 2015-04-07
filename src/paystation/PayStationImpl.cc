@@ -24,7 +24,7 @@ void PayStationImpl::addPayment( int coinValue )
 }
   
 int PayStationImpl::readDisplay() {
-	return timeBoughtSoFar;
+	return displayStrategy->calculateOutput(timeBoughtSoFar);
 }
   
 Receipt PayStationImpl::buy() {
@@ -39,6 +39,7 @@ void PayStationImpl::cancel() {
 
 PayStationImpl::~PayStationImpl() {
 	delete rateStrategy;
+	delete displayStrategy;
 }
 
 
@@ -51,4 +52,5 @@ PayStationImpl::PayStationImpl(PayStationFactory pf) {
 	reset();
 	rateStrategy = pf->createRateStrategy();
 	psFactory = pf;
+	displayStrategy = pf->createDisplayStrategy();
 }

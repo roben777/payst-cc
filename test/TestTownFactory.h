@@ -21,6 +21,7 @@
 #include "PayStationFactory.h"
 #include "One2OneRateStrategy.h"
 #include "StandardReceipt.h"
+#include "ValueDisplayStrategy.h"
 #include <cstddef>
 
 
@@ -34,6 +35,10 @@ public:
 
 	Receipt createReceipt(int parkingTime) {
 		return new StandardReceipt(parkingTime);
+	}
+	
+	DisplayStrategy createDisplayStrategy() {
+		return new ValueDisplayStrategy;
 	}
 };
 

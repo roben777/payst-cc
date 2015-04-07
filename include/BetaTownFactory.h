@@ -34,6 +34,10 @@ public:
 	Receipt createReceipt(int parkingTime) {
 		return new StandardReceipt(parkingTime, true);
 	}
+
+	DisplayStrategy createDisplayStrategy() {
+		return new ValueDisplayStrategy;
+	}
 };
 
 

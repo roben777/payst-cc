@@ -24,6 +24,7 @@
 #include "PayStation.h"
 #include "RateStrategy.h"
 #include "PayStationFactory.h"
+#include "DisplayStrategy.h"
 
 class PayStationImpl : public PayStationInterface {
 private:
@@ -32,6 +33,7 @@ private:
 
 	RateStrategy rateStrategy; ///< the strategy for rate calculation
 	PayStationFactory psFactory; ///< the factory object to create receipts
+	DisplayStrategy displayStrategy; ///< the strategy for displaying time
 
 	/// clears the amount inserted so far and time bought
 	void reset();

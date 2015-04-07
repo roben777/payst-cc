@@ -20,6 +20,7 @@
 
 #include "RateStrategy.h"
 #include "Receipt.h"
+#include "DisplayStrategy.h"
 
 
 /// PayStationFactory interface class
@@ -34,6 +35,11 @@ public:
 	/// \return a receipt object allocated on the heap; to be freed by
 	/// the client of the PayStation::buy method.
 	virtual Receipt createReceipt(int parkingTime) = 0;
+
+	/// creates the appropriate display strategy
+	/// \return a DisplayStrategy implementation object allocated on the
+	/// heap. Must be freed by the client code (PayStation object)
+	virtual DisplayStrategy createDisplayStrategy() = 0;
 };
 
 typedef PayStationFactoryInterface* PayStationFactory;
