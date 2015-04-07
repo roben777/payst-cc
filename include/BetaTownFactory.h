@@ -21,6 +21,7 @@
 #include "PayStationFactory.h"
 #include "ProgressiveRateStrategy.h"
 #include "StandardReceipt.h"
+#include "ValueDisplayStrategy.h"
 
 
 /// class implementing the PayStationFactory interface; configures the

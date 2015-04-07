@@ -21,7 +21,7 @@
 #include "PayStationFactory.h"
 #include "LinearRateStrategy.h"
 #include "StandardReceipt.h"
-#include "ValueDisplayStrategy.h"
+#include "TimeDisplayStrategy.h"
 #include <cstddef>
 
 
@@ -38,7 +38,7 @@ public:
 	}
 
 	DisplayStrategy createDisplayStrategy() {
-		return new ValueDisplayStrategy;
+		return new TimeDisplayStrategy;
 	}
 };
 

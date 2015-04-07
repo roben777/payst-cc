@@ -24,6 +24,7 @@
 #include "AlternatingRateStrategy.h"
 #include "ClockBasedDecisionStrategy.h"
 #include "StandardReceipt.h"
+#include "ValueDisplayStrategy.h"
 
 
 /// class implementing the PayStationFactory interface; configures the

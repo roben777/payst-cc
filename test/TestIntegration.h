@@ -20,6 +20,7 @@
 #include "GammaTownFactory.h"
 
 #include <sstream>
+#include <ctime>
 
 /// Test fixture for ProgressiveRateStrategy
 class TestIntegration : public CppUnit::TestFixture {
@@ -61,7 +62,17 @@ public:
 	void testPSAlpha2h300cStandard()  {
 		ps = new PayStationImpl(new AlphaTownFactory);
 		add1Dollar();  add1Dollar();  add1Dollar();
-		CPPUNIT_ASSERT(ps->readDisplay() == 120);
+
+		// I had to refactor this test case after introducing end time
+		// display strategy for Alpha Town. Get the crt time and add 2 h
+		// to it
+		struct tm *timeval;
+		time_t tt;
+		tt = time( NULL );
+		timeval = localtime(&tt);
+		
+		CPPUNIT_ASSERT(ps->readDisplay() == ((timeval->tm_hour+2) % 24)*100 +
+			timeval->tm_min);
 		Receipt receipt = ps->buy();
 		CPPUNIT_ASSERT(receipt != NULL);
 		CPPUNIT_ASSERT(nrLinesInReceipt(receipt) == 3);
