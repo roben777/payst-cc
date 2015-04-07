@@ -23,6 +23,7 @@
 
 #include "PayStation.h"
 #include "RateStrategy.h"
+#include "PayStationFactory.h"
 
 class PayStationImpl : public PayStationInterface {
 private:
@@ -30,13 +31,14 @@ private:
 	int timeBoughtSoFar;
 
 	RateStrategy rateStrategy; ///< the strategy for rate calculation
+	PayStationFactory psFactory; ///< the factory object to create receipts
 
 	/// clears the amount inserted so far and time bought
 	void reset();
 public:
 	/// constructor
-	/// \param [in] rs the rate strategy object to be used by the pay station.
-	PayStationImpl(RateStrategy rs);
+	/// \param [in] pf the factory object to be used by the pay station.
+	PayStationImpl(PayStationFactory pf);
 	
   void addPayment( int coinValue )
 		throw (IllegalCoinException);

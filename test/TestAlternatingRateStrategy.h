@@ -16,6 +16,7 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include "AlternatingRateStrategy.h"
 #include "FixedDecisionStrategy.h"
+#include "LinearRateStrategy.h"
 
 /// Test fixture for ProgressiveRateStrategy
 class TestAlternatingRateStrategy : public CppUnit::TestFixture {

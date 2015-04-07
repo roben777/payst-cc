@@ -16,6 +16,8 @@
 #ifndef __RECEIPT_H
 #define __RECEIPT_H
 
+#include <iostream>
+
 class ReceiptInterface {
 public:
   /**
@@ -24,6 +26,12 @@ public:
   */
   virtual int value() = 0;
 
+	/**
+		 Print a receipt to an output stream
+		 \param [in] str the stream to print the receipt to
+	*/
+	virtual void print(std::ostream& str) = 0;
+	
 	/**
 	 * Virtual destructor: will be called by the concrete Receipt
 	 * class destructor.

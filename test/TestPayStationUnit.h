@@ -15,7 +15,7 @@
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>
 #include "PayStationImpl.h"
-#include "One2OneRateStrategy.h"
+#include "TestTownFactory.h"
 
 class TestPayStationUnit : public CppUnit::TestFixture {
 	CPPUNIT_TEST_SUITE(TestPayStationUnit);
@@ -32,7 +32,7 @@ private:
 	
 public:
 	void setUp() {
-		ps = new PayStationImpl (new One2OneRateStrategy);
+		ps = new PayStationImpl (new TestTownFactory);
 	}
 
 	void tearDown() {

@@ -8,8 +8,7 @@
  */
 
 #include "PayStationImpl.h"
-#include "ReceiptImpl.h"
-//#include "LinearRateStrategy.h"
+
 
 void PayStationImpl::addPayment( int coinValue )
 	throw (IllegalCoinException){
@@ -29,7 +28,7 @@ int PayStationImpl::readDisplay() {
 }
   
 Receipt PayStationImpl::buy() {
-	Receipt r =  new ReceiptImpl(timeBoughtSoFar);
+	Receipt r =  psFactory->createReceipt(timeBoughtSoFar);
 	reset();
 	return r;
 }
@@ -39,27 +38,17 @@ void PayStationImpl::cancel() {
 }
 
 PayStationImpl::~PayStationImpl() {
-	// before I start Iteration 5, I realize that I have a memory leak
-	// (another example of something hard to test automatically; use
-	// valgrind instead) 
-	// RateStrategy is a pointer. We make a convention: whenever we pass
-	// the pointer to a function, the function owns it and it is
-	// responsible to free it. So we must not pass pointers to automatic
-	// variables. The function must free it.
-	// See std::auto_ptr for a safer way to do all of this
 	delete rateStrategy;
 }
 
-// PayStationImpl::PayStationImpl() {
-// 	reset();
-// 	rateStrategy = new LinearRateStrategy; // the default strategy
-// }
 
 void PayStationImpl::reset() {
 	insertedSoFar = timeBoughtSoFar = 0;
 }
 
-PayStationImpl::PayStationImpl(RateStrategy rs) {
+
+PayStationImpl::PayStationImpl(PayStationFactory pf) {
 	reset();
-	rateStrategy = rs;  // rs is a pointer to allocated memory
+	rateStrategy = pf->createRateStrategy();
+	psFactory = pf;
 }

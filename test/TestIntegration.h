@@ -15,8 +15,8 @@
 #include <cppunit/TestFixture.h>
 #include <cppunit/extensions/HelperMacros.h>
 #include "PayStationImpl.h"
-#include "ProgressiveRateStrategy.h"
-#include "LinearRateStrategy.h"
+#include "AlphaTownFactory.h"
+#include "BetaTownFactory.h"
 
 /// Test fixture for ProgressiveRateStrategy
 class TestIntegration : public CppUnit::TestFixture {
@@ -37,7 +37,7 @@ private:
 public:
 	// integrate test PS and Linear strategy
 	void testPSLinear2h300c()  {
-		ps = new PayStationImpl(new LinearRateStrategy);
+		ps = new PayStationImpl(new AlphaTownFactory);
 		add1Dollar();  add1Dollar();  add1Dollar();
 		CPPUNIT_ASSERT(ps->readDisplay() == 120);
 		delete ps;
@@ -45,7 +45,7 @@ public:
 
 		// integrate test PS and Linear strategy
 	void testPSProgressive2h350c()  {
-		ps = new PayStationImpl(new ProgressiveRateStrategy);
+		ps = new PayStationImpl(new BetaTownFactory);
 		add1Dollar();  add1Dollar();  add1Dollar();
 		ps->addPayment(25);  ps->addPayment(25);
 		CPPUNIT_ASSERT(ps->readDisplay() == 120);
