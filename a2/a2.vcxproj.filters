@@ -86,10 +86,10 @@
     <ClCompile Include="..\test\main.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\paystation\DanishCoinStrategy.cpp">
+    <ClCompile Include="..\src\paystation\EuroCoinStrategy.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\paystation\EuroCoinStrategy.cc">
+    <ClCompile Include="..\src\paystation\DanishCoinStrategy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,0 +1,18 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch a2
+# Changes to be committed:
+#	modified:   a2.sdf
+#	modified:   a2/Debug/a2.tlog/CL.read.1.tlog
+#	modified:   a2/Debug/a2.tlog/CL.write.1.tlog
+#	modified:   a2/Debug/a2.tlog/link.read.1.tlog
+#	modified:   a2/Debug/a2.tlog/link.write.1.tlog
+#	modified:   a2/Debug/vc120.idb
+#	modified:   a2/a2.vcxproj
+#	modified:   a2/a2.vcxproj.filters
+#	modified:   include/DanishCoinStrategy.h
+#	modified:   include/EuroCoinStrategy.h
+#	renamed:    src/paystation/DanishCoinStrategy.cpp -> src/paystation/DanishCoinStrategy.cc
+#
+
