@@ -23,6 +23,7 @@
 
 #include "PayStation.h"
 #include "RateStrategy.h"
+#include "ValidCoinStrategy.h"
 
 class PayStationImpl : public PayStationInterface {
 private:
@@ -30,6 +31,7 @@ private:
 	int timeBoughtSoFar;
 
 	RateStrategy rateStrategy; ///< the strategy for rate calculation
+	ValidCoin coinCheck; /// coin system
 
 	/// clears the amount inserted so far and time bought
 	void reset();

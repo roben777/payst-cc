@@ -10,16 +10,21 @@
 #include "PayStationImpl.h"
 #include "ReceiptImpl.h"
 #include "LinearRateStrategy.h"
+#include "DanishCoinStrategy.h"
 
 void PayStationImpl::addPayment( int coinValue )
 	throw (IllegalCoinException){
-	switch (coinValue) {
+	/*switch (coinValue) {
 		case 5: break;
 		case 10: break;
 		case 25: break;
 		default:
 			throw IllegalCoinException("Invalid coin: " + coinValue);
-	}
+	}*/
+	coinCheck->coinInserted(coinValue);
+	if (coinCheck == 0)
+		throw IllegalCoinException("Invalid coin: " + coinValue);
+
 	insertedSoFar += coinValue;
 	timeBoughtSoFar = rateStrategy->calculateTime(insertedSoFar);
 }
@@ -48,11 +53,13 @@ PayStationImpl::~PayStationImpl() {
 	// variables. The function must free it.
 	// See std::auto_ptr for a safer way to do all of this
 	delete rateStrategy;
+	delete coinCheck;
 }
 
 PayStationImpl::PayStationImpl() {
 	reset();
 	rateStrategy = new LinearRateStrategy; // the default strategy
+	coinCheck = new DanishCoinStrategy;
 }
 
 void PayStationImpl::reset() {
