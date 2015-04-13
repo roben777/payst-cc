@@ -1,12 +1,11 @@
-Compiling the Paystation GUI
-----------------------------
+# Compiling the Paystation GUI
 
-The GUI uses the Fast Light Toolkit library available under the
-Gnu-GPL license at
+The GUI uses the Fast Light Toolkit library available under the Gnu-GPL license at
 http://www.fltk.org/
 
-The code was tested on both the lab machines (Linux version 2.6.32)
-and Mac OSX 10.6. 
+The code was tested on both Linux version 2.6.32 and Mac OSX 10.6. 
+
+![FLTK Pay Station](screenshots/paystation-fltk.png)
 
 A) The Mac OS build system assumes FLTK is installed in the system
 wide directories, for ex: /usr/local/include for the headers and
@@ -25,6 +24,8 @@ Makefile in src/view subdirectory and specify the following:
   2) the location of the fltk library
   3) any other necessary options for compiling and linking can be
 	obtained by running:
-    fltk-config --cxxflags  and
+```
+    fltk-config --cxxflags  
     fltk-config --ldflags
+```
   from the FLTK install directory.
