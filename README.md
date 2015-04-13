@@ -29,3 +29,14 @@ Makefile in src/view subdirectory and specify the following:
     fltk-config --ldflags
 ```
   from the FLTK install directory.
+
+# Paystation repository and development history
+
+The project iterations follow the textbook and can be tracked in the 
+development history of the repository. The commits corresponding to the 
+textbook iterations are tagged using the syntax 
+```
+(n).keyword[.i(m)]
+```
+where (n) represents the chapter number, the keyword relates to the title of the
+chapter, and (m) is an optional iteration number. 
