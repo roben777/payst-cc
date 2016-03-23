@@ -2,7 +2,8 @@
 # Build system for PayStation static library 
 ########
 THEOBJECTS = main.o PSGui.o
-HEADERDIRS = -I ../../include -I /home/lib2720/lect/fltk-1.3.0/
+GUIDIR = /home/lib2720/lect/fltk-1.3.0/
+HEADERDIRS = -I ../../include -I $(GUIDIR)
 OBJDIR = ../../obj/view
 PSDIR = ../../obj/paystation
 #######
@@ -15,7 +16,7 @@ UNAME := $(shell uname)
 ifeq ($(UNAME),Darwin)
 LNFLAGS = -L$(PSDIR)/ -lpaystation -lfltk -lpthread -framework Cocoa
 else
-LNFLAGS = -L/usr/local/lib -L$(PSDIR)/ -lpaystation -lfltk -lXext -lXft -lfontconfig -lpthread -ldl -lm -lX11
+LNFLAGS = -L/usr/local/lib -L$(PSDIR)/ -L$(GUIDIR)/lib -lpaystation -lfltk -lXcursor -lXfixes -lXext -lXft -lfontconfig -lXinerama -lpthread -ldl -lm -lX11
 endif
 OBJS = $(addprefix $(OBJDIR)/, $(THEOBJECTS))
 ########
